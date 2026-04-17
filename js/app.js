@@ -337,6 +337,19 @@ function renderHours(data, isToday) {
 }
 
 // ----------------------------------------------------------------
+//  VISIBILIDAD DE SECCIONES
+// ----------------------------------------------------------------
+function toggleDataSections(show) {
+    const statsSec = document.querySelector('.stats-section');
+    const chartSec = document.querySelector('.chart-section');
+    const hdrSec   = document.querySelector('.section-header');
+    
+    if (statsSec) statsSec.style.display = show ? '' : 'none';
+    if (chartSec) chartSec.style.display = show ? '' : 'none';
+    if (hdrSec)   hdrSec.style.display   = show ? '' : 'none';
+}
+
+// ----------------------------------------------------------------
 //  CAMBIO DE PESTAÑA
 // ----------------------------------------------------------------
 function switchTab(tab) {
@@ -351,6 +364,7 @@ function switchTab(tab) {
     if (tab === 'today') {
         setText('tab-date', capitalizeFirst(localDate(today)));
         if (todayData.length > 0) {
+            toggleDataSections(true);
             renderChart(todayData);
             renderHours(todayData, true);
             renderStats(todayData, true);
@@ -358,10 +372,12 @@ function switchTab(tab) {
     } else {
         setText('tab-date', capitalizeFirst(localDate(tomorrow)));
         if (tomorrowData.length > 0) {
+            toggleDataSections(true);
             renderChart(tomorrowData);
             renderHours(tomorrowData, false);
             renderStats(tomorrowData, false);
         } else {
+            toggleDataSections(false);
             showTomorrowNotice(tomorrow);
         }
     }
@@ -383,6 +399,7 @@ function showTomorrowNotice(tomorrow) {
 }
 
 function showError(msg) {
+    toggleDataSections(false);
     document.getElementById('hours-grid').innerHTML = `
         <div class="error-box">
             <h3><i class="fa-solid fa-bolt"></i> No se pudieron cargar los precios</h3>
@@ -394,6 +411,7 @@ function showError(msg) {
 }
 
 function showLoading() {
+    toggleDataSections(false);
     document.getElementById('hours-grid').innerHTML = `
         <div class="loading-placeholder">
             <div class="spinner"></div>
@@ -435,6 +453,7 @@ async function init() {
     try {
         todayData = await fetchPrices(today);
 
+        toggleDataSections(true);
         renderStats(todayData, true);
         renderChart(todayData);
         renderHours(todayData, true);
