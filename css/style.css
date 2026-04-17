@@ -689,23 +689,38 @@ body {
 }
 
 @media (max-width: 768px) {
-    .main { padding: 1.75rem 1.25rem 4rem; }
-    .header-content { padding: 0 1.25rem; }
+    .main { padding: 1.5rem 1rem 4rem; }
+    .header-content { padding: 0 1rem; }
     .chart-container { height: 220px; }
     .hours-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.6rem; }
     .stat-value { font-size: 1.65rem; }
-    .logo-text span { display: none; }
-    .tabs-section { flex-wrap: wrap; gap: 0.75rem; }
+    .tabs-section { flex-wrap: wrap; gap: 1rem; }
+    .update-badge { padding: 5px 12px; font-size: 0.72rem; }
 }
 
 @media (max-width: 480px) {
-    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .header-content { height: 72px; gap: 8px; padding: 0 0.75rem; }
+    .logo-icon { width: 32px; height: 32px; font-size: 16px; }
+    .logo-text h1 { font-size: 0.95rem; }
+    .logo-text span { font-size: 0.6rem; }
+    .theme-toggle { width: 32px; height: 32px; font-size: 14px; }
+    .update-badge { height: 28px; padding: 0 8px; gap: 4px; }
+    #last-update { font-size: 0.6rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .stat-card { padding: 1.25rem 1rem; }
+    .stat-value { font-size: 1.4rem; }
     .hours-grid { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 0.5rem; }
     .hour-card { padding: 0.9rem 0.65rem 0.85rem; }
     .hour-price { font-size: 1.1rem; }
-    .legend { gap: 0.75rem; }
+    .legend { gap: 0.6rem; justify-content: center; width: 100%; }
+    .tabs-section { justify-content: center; }
+    .tab { padding: 0.5rem 1rem; font-size: 0.8rem; }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
+    .logo-text h1 { font-size: 0.85rem; }
+    .logo-text span { display: none; } /* Only hide here if absolutely necessary for <380px */
+    .update-badge #last-update { display: none; }
+    .update-badge::after { content: 'OK'; font-weight: 700; font-size: 0.55rem; }
     .stats-grid { grid-template-columns: 1fr; }
 }
