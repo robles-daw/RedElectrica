@@ -29,20 +29,20 @@ let priceChart   = null;
 // ----------------------------------------------------------------
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
-    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
-        document.documentElement.setAttribute('data-theme', 'light');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
     }
     
     updateThemeIcon();
     
     document.getElementById('theme-toggle').addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme');
-        const nextTheme = current === 'light' ? 'dark' : 'light';
+        const nextTheme = current === 'dark' ? 'light' : 'dark';
         
-        if (nextTheme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
+        if (nextTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
         } else {
             document.documentElement.removeAttribute('data-theme');
         }
@@ -59,21 +59,21 @@ function initTheme() {
 }
 
 function updateThemeIcon() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const btn = document.getElementById('theme-toggle');
     if(btn) {
-        btn.innerHTML = isLight ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
-        btn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+        btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        btn.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
     }
 }
 
 function getChartColors() {
     const style = getComputedStyle(document.documentElement);
     return {
-        bg: style.getPropertyValue('--bg-card').trim() || '#111827',
-        textPrimary: style.getPropertyValue('--text-primary').trim() || '#eef2ff',
-        textSecondary: style.getPropertyValue('--text-secondary').trim() || '#94a3b8',
-        border: style.getPropertyValue('--border').trim() || 'rgba(255,255,255,0.09)'
+        bg: style.getPropertyValue('--bg-card').trim() || '#ffffff',
+        textPrimary: style.getPropertyValue('--text-primary').trim() || '#0f172a',
+        textSecondary: style.getPropertyValue('--text-secondary').trim() || '#475569',
+        border: style.getPropertyValue('--border').trim() || 'rgba(0,0,0,0.08)'
     };
 }
 
